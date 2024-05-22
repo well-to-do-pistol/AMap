@@ -15,6 +15,11 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        externalNativeBuild {
+            cmake {
+                cppFlags += ""
+            }
+        }
     }
 
     buildTypes {
@@ -44,6 +49,12 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    externalNativeBuild {
+        cmake {
+            path = file("src/main/cpp/CMakeLists.txt")
+            version = "3.22.1"
+        }
+    }
 }
 
 dependencies {
@@ -51,14 +62,18 @@ dependencies {
 
 //Google推荐的EasyPermission库
     implementation("pub.devrel:easypermissions:3.0.0")
+    //Material库
+    implementation ("com.google.android.material:material:1.6.1")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
-    implementation(files("src\\main\\java\\libs\\AMap3DMap_10.0.700_AMapSearch_9.7.2_AMapLocation_6.4.5_20240508.jar"))
-    implementation(files("src\\main\\java\\libs\\arm64-v8a\\libAMapSDK_MAP_v10_0_700.so"))
-    implementation(files("src\\main\\java\\libs\\armeabi-v7a\\libAMapSDK_MAP_v10_0_700.so"))
+    implementation(files("libs\\AMap3DMap_10.0.700_AMapSearch_9.7.2_AMapLocation_6.4.5_20240508.jar"))
+    implementation(files("libs\\arm64-v8a\\libAMapSDK_MAP_v10_0_700.so"))
+    implementation(files("libs\\armeabi-v7a\\libAMapSDK_MAP_v10_0_700.so"))
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    //RecyclerView的好搭档
+    implementation ("com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4")
 }
